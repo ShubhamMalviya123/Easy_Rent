@@ -1,0 +1,215 @@
+{
+  "info": {
+    "name": "EasyRent - Full Flow (Auto)",
+    "description": "Run this whole collection top-to-bottom via Collection Runner. IDs (roomId, renterId, relationId) are captured automatically from each response and reused in later requests via {{variables}}. No manual copy-paste needed.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000" }
+  ],
+  "item": [
+    {
+      "name": "1. Register Renter",
+      "event": [{
+        "listen": "test",
+        "script": { "exec": [
+          "const data = pm.response.json();",
+          "if (data.registeredUser) {",
+          "  pm.collectionVariables.set('renterEmail', data.registeredUser.email);",
+          "  pm.collectionVariables.set('renterId', data.registeredUser._id);",
+          "  console.log('renterId =', data.registeredUser._id);",
+          "}",
+          "pm.test('status is 200 or already-registered 401', () => {",
+          "  pm.expect([200,401]).to.include(pm.response.code);",
+          "});"
+        ]}
+      }],
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Test User\",\n  \"houseName\": \"Test House\",\n  \"password\": \"test1234\",\n  \"userType\": \"renter\",\n  \"email\": \"renter_{{$timestamp}}@example.com\",\n  \"phoneNumber\": \"9999999999\",\n  \"dateOfBirth\": \"2000-01-01\",\n  \"homeAddress\": {\n    \"street\": \"MG Road\",\n    \"city\": \"Raipur\",\n    \"state\": \"Chhattisgarh\",\n    \"zipCode\": \"492001\"\n  },\n  \"aadharCardNumber\": \"{{$randomInt}}12345678\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/users/register", "host": ["{{baseUrl}}"], "path": ["api","users","register"] }
+      }
+    },
+    {
+      "name": "2. Register Owner",
+      "event": [{
+        "listen": "test",
+        "script": { "exec": [
+          "const data = pm.response.json();",
+          "if (data.registeredUser) {",
+          "  pm.collectionVariables.set('ownerEmail', data.registeredUser.email);",
+          "  pm.collectionVariables.set('ownerId', data.registeredUser._id);",
+          "  console.log('ownerId =', data.registeredUser._id);",
+          "}"
+        ]}
+      }],
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Owner User\",\n  \"houseName\": \"Sunshine Apartments\",\n  \"password\": \"owner1234\",\n  \"userType\": \"landowner\",\n  \"email\": \"owner_{{$timestamp}}@example.com\",\n  \"phoneNumber\": \"8888888888\",\n  \"dateOfBirth\": \"1990-05-15\",\n  \"homeAddress\": {\n    \"street\": \"Civil Lines\",\n    \"city\": \"Raipur\",\n    \"state\": \"Chhattisgarh\",\n    \"zipCode\": \"492001\"\n  },\n  \"aadharCardNumber\": \"{{$randomInt}}87654321\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/users/register", "host": ["{{baseUrl}}"], "path": ["api","users","register"] }
+      }
+    },
+    {
+      "name": "3. Login Owner",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"email\": \"{{ownerEmail}}\",\n  \"password\": \"owner1234\"\n}" },
+        "url": { "raw": "{{baseUrl}}/api/users/login", "host": ["{{baseUrl}}"], "path": ["api","users","login"] }
+      }
+    },
+    {
+      "name": "4. Create Room (as Owner)",
+      "event": [{
+        "listen": "test",
+        "script": { "exec": [
+          "const data = pm.response.json();",
+          "if (data.room) {",
+          "  pm.collectionVariables.set('roomId', data.room._id);",
+          "  console.log('roomId =', data.room._id);",
+          "}",
+          "pm.test('room created', () => pm.expect(pm.response.code).to.eql(200));"
+        ]}
+      }],
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"roomNumber\": 101,\n  \"address\": {\n    \"street\": \"MG Road\",\n    \"city\": \"Raipur\",\n    \"state\": \"Chhattisgarh\",\n    \"zipCode\": \"492001\"\n  },\n  \"rentPrice\": 8000,\n  \"roomType\": \"single\",\n  \"numberOfRooms\": 1,\n  \"numberOfBathrooms\": 1\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/rooms", "host": ["{{baseUrl}}"], "path": ["api","rooms"] }
+      }
+    },
+    {
+      "name": "5. Get Available Rooms",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{baseUrl}}/api/rooms/availableRoom", "host": ["{{baseUrl}}"], "path": ["api","rooms","availableRoom"] }
+      }
+    },
+    {
+      "name": "6. Login Renter",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"email\": \"{{renterEmail}}\",\n  \"password\": \"test1234\"\n}" },
+        "url": { "raw": "{{baseUrl}}/api/users/login", "host": ["{{baseUrl}}"], "path": ["api","users","login"] }
+      }
+    },
+    {
+      "name": "7. Send Request for Room (as Renter)",
+      "event": [{
+        "listen": "test",
+        "script": { "exec": [
+          "pm.test('request created', () => pm.expect(pm.response.code).to.eql(200));"
+        ]}
+      }],
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{}" },
+        "url": { "raw": "{{baseUrl}}/api/request/{{roomId}}", "host": ["{{baseUrl}}"], "path": ["api","request","{{roomId}}"] }
+      }
+    },
+    {
+      "name": "8. Login Owner (again)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"email\": \"{{ownerEmail}}\",\n  \"password\": \"owner1234\"\n}" },
+        "url": { "raw": "{{baseUrl}}/api/users/login", "host": ["{{baseUrl}}"], "path": ["api","users","login"] }
+      }
+    },
+    {
+      "name": "9. View Requests for Room (as Owner)",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{baseUrl}}/api/request/users/{{roomId}}", "host": ["{{baseUrl}}"], "path": ["api","request","users","{{roomId}}"] }
+      }
+    },
+    {
+      "name": "10. Accept Request (as Owner)",
+      "event": [{
+        "listen": "test",
+        "script": { "exec": [
+          "pm.test('accept succeeded', () => pm.expect(pm.response.code).to.eql(200));",
+          "console.log(pm.response.text());"
+        ]}
+      }],
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"roomId\": \"{{roomId}}\",\n  \"renterId\": \"{{renterId}}\"\n}" },
+        "url": { "raw": "{{baseUrl}}/api/relationship/accept", "host": ["{{baseUrl}}"], "path": ["api","relationship","accept"] }
+      }
+    },
+    {
+      "name": "11. Login Renter (again)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"email\": \"{{renterEmail}}\",\n  \"password\": \"test1234\"\n}" },
+        "url": { "raw": "{{baseUrl}}/api/users/login", "host": ["{{baseUrl}}"], "path": ["api","users","login"] }
+      }
+    },
+    {
+      "name": "12. Get My Notifications (as Renter)",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{baseUrl}}/api/notifications", "host": ["{{baseUrl}}"], "path": ["api","notifications"] }
+      }
+    },
+    {
+      "name": "13. Get My Room Details (as Renter)",
+      "event": [{
+        "listen": "test",
+        "script": { "exec": [
+          "const data = pm.response.json();",
+          "if (data.room && data.room.relationId) {",
+          "  pm.collectionVariables.set('relationId', data.room.relationId);",
+          "  console.log('relationId =', data.room.relationId);",
+          "}"
+        ]}
+      }],
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{baseUrl}}/api/relationship/getRoomDetails", "host": ["{{baseUrl}}"], "path": ["api","relationship","getRoomDetails"] }
+      }
+    },
+    {
+      "name": "14. Add Rent History (relationId)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"rentPaid\": 8000,\n  \"date\": \"2026-08-16T00:00:00\",\n  \"paymentMethod\": \"Cash\",\n  \"remarks\": \"August rent paid\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/history/{{relationId}}", "host": ["{{baseUrl}}"], "path": ["api","history","{{relationId}}"] }
+      }
+    },
+    {
+      "name": "15. Get Rent History",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{baseUrl}}/api/history/{{relationId}}", "host": ["{{baseUrl}}"], "path": ["api","history","{{relationId}}"] }
+      }
+    },
+    {
+      "name": "16. Toggle Favourite (as Renter, re-login if needed)",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{baseUrl}}/api/favourite/toggle/{{roomId}}", "host": ["{{baseUrl}}"], "path": ["api","favourite","toggle","{{roomId}}"] }
+      }
+    }
+  ]
+}
