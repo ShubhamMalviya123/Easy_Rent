@@ -28,19 +28,19 @@ const Footer = () => {
 
             {/* Social Links */}
             <div className="flex space-x-5">
-              <a href="https://github.com/kumarpraveer143" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary-600 transition-colors duration-300 transform hover:scale-110">
+              <a href="https://github.com/ShubhamMalviya123" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary-600 transition-colors duration-300 transform hover:scale-110">
                 <span className="sr-only">GitHub</span>
                 <FaGithub className="h-6 w-6" />
               </a>
-              <a href="https://x.com/kumarpraveer3?t=s-r4AAAheb9JaG9UBN70og&s=09" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary-600 transition-colors duration-300 transform hover:scale-110">
+              <a href="https://x.com/Shubham87771150" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary-600 transition-colors duration-300 transform hover:scale-110">
                 <span className="sr-only">X (Twitter)</span>
                 <FaTwitter className="h-6 w-6" />
               </a>
-              <a href="https://www.instagram.com/kumar_praveeer?igsh=a3ZxamN0aWFqcjQw" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary-600 transition-colors duration-300 transform hover:scale-110">
+              <a href="https://www.instagram.com/shubhamchouhan1001" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary-600 transition-colors duration-300 transform hover:scale-110">
                 <span className="sr-only">Instagram</span>
                 <FaInstagram className="h-6 w-6" />
               </a>
-              <a href="https://www.linkedin.com/in/praveerdeveloper/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary-600 transition-colors duration-300 transform hover:scale-110">
+              <a href="www.linkedin.com/in/shubham-malviya-a8b3b6321" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary-600 transition-colors duration-300 transform hover:scale-110">
                 <span className="sr-only">LinkedIn</span>
                 <FaLinkedin className="h-6 w-6" />
               </a>
