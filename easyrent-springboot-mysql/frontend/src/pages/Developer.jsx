@@ -26,8 +26,8 @@ const Developer = () => {
               <div className="w-full flex items-center justify-center relative">
                 <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-2xl transform rotate-6 scale-105 opacity-20 blur-lg"></div>
                 <img
-                  src="images/praveer.jpg"
-                  alt="Praveer Kumar"
+                  src="images/shubham.jpg"
+                  alt="Shubham Malviya"
                   className="relative rounded-2xl shadow-2xl w-80 h-96 object-cover z-10 transform hover:scale-105 transition-transform duration-500"
                 />
               </div>
@@ -36,13 +36,13 @@ const Developer = () => {
             {/* Text and Social Section */}
             <div className={`lg:w-1/2 w-full text-center lg:text-left transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
               <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 mb-4 tracking-tight">
-                Praveer Kumar
+                Shubham Malviya
               </h1>
               <p className="text-2xl md:text-3xl leading-8 font-extrabold tracking-tight text-primary-600 mb-6">
                 Full-Stack Developer
               </p>
               <p className="text-xl text-gray-600 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                Hi, I'm a passionate developer currently pursuing MCA at NIT Bhopal.
+                Hi, I'm a passionate developer currently pursuing MCA at NIT Raipur.
                 I am dedicated to building intuitive applications and solving
                 real-world problems with innovative solutions. Let's connect and
                 create something amazing together!
@@ -69,7 +69,7 @@ const Developer = () => {
               {/* Social Links */}
               <div className="flex justify-center lg:justify-start space-x-6">
                 <a
-                  href="https://github.com/kumarpraveer143"
+                  href="https://github.com/ShubhamMalviya123"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative inline-flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100"
@@ -77,7 +77,7 @@ const Developer = () => {
                   <FaGithub size={24} className="text-gray-700 group-hover:text-black transition-colors duration-300" />
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/praveerdeveloper/"
+                  href="www.linkedin.com/in/shubham-malviya-a8b3b6321"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative inline-flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100"
@@ -85,7 +85,7 @@ const Developer = () => {
                   <FaLinkedin size={24} className="text-gray-700 group-hover:text-blue-600 transition-colors duration-300" />
                 </a>
                 <a
-                  href="https://x.com/kumarpraveer3?t=s-r4AAAheb9JaG9UBN70og&s=09"
+                  href="https://x.com/Shubham87771150"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative inline-flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100"
@@ -93,7 +93,7 @@ const Developer = () => {
                   <FaTwitter size={24} className="text-gray-700 group-hover:text-blue-400 transition-colors duration-300" />
                 </a>
                 <a
-                  href="https://www.instagram.com/kumar_praveeer?igsh=a3ZxamN0aWFqcjQw"
+                  href="https://www.instagram.com/shubhamchouhan1001"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative inline-flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100"
