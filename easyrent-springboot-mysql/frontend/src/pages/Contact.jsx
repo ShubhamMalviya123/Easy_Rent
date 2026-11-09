@@ -147,10 +147,10 @@ const Contact = () => {
                 Send us an email and we'll respond within 24 hours.
               </p>
               <a
-                href="mailto:techpraveer@gmail.com"
+                href="mailto:shubhamchouhan7879@gmail.com"
                 className="text-blue-600 hover:text-blue-700 transition-colors duration-300 font-medium block text-center"
               >
-                techpraveer@gmail.com
+                shubhamchouhan7879@gmail.com
               </a>
             </div>
 
@@ -164,10 +164,10 @@ const Contact = () => {
                 Call us for immediate assistance during business hours.
               </p>
               <a
-                href="tel:+918252965226"
+                href="tel:+917440845528"
                 className="text-purple-600 hover:text-purple-700 transition-colors duration-300 font-medium block text-center"
               >
-                +91 8252965226
+                +91 7440845528
               </a>
             </div>
 
@@ -181,7 +181,7 @@ const Contact = () => {
                 Start a WhatsApp chat for instant messaging support.
               </p>
               <a
-                href="https://wa.me/918252965226"
+                href="https://wa.me/917440845528"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-green-600 hover:text-green-700 transition-colors duration-300 font-medium block text-center"
